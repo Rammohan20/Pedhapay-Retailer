@@ -1,15 +1,16 @@
 import { useRoutes } from 'react-router-dom';
 import routes from '../constants/routes';
 import Login from '../views/auth/login';
+import Home from '../views/retailer/home';
 
 export function AppRoutes() {
 
     const RetailerRoutes = [
         {
-            path: '/',
+            path: routes.dashbaord,
             children: [
                 {
-                    index: true, element: <Login/>,
+                    index: true, element: <Home/>,
                 },
                
             ]
@@ -25,7 +26,6 @@ export function AppRoutes() {
     let appRoutes
     let ram
 
-    
     if(ram && 100){
         appRoutes = RetailerRoutes
     }
@@ -33,5 +33,5 @@ export function AppRoutes() {
         appRoutes = AuthRoutes
     }
 
-    return useRoutes(AuthRoutes);
+    return useRoutes(appRoutes);
 }

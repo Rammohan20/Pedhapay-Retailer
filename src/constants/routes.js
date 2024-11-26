@@ -1,4 +1,5 @@
 const routes = {
-   login: "/login"
+   login: "/login",
+   dashbaord: "/"
 }
 export default routes

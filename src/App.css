@@ -1,6 +1,116 @@
-.login-page{
-  padding: 3rem 0;
+/* login */
+.login-page img{
+  height: 100vh;
+}
+.btn{
+  text-transform: uppercase !important;
+  border-radius: 2px !important;
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  -ms-border-radius: 2px !important;
+  -o-border-radius: 2px !important;
+}
+@media screen and (max-width: 480px) {
+  .login-page .login-form{
+    padding: 2rem !important;
+  }
+  .login-form ul{
+    text-align: center;
+    display: block !important;
+  }
+  
+}
+.login-page .login-form{
+  padding: 2rem 8rem;
 }
 .login-page .login-form img{
   height: 5rem;
+  margin: 1rem 0;
 }
+.login-page .login-form form label{
+   font-weight: 500;
+   margin-bottom: .5rem;
+}
+.login-page .login-form form label span{
+  color: var(--bs-danger);
+}
+.login-page .login-form form .form-control{
+  border-radius: 2px !important;
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  -ms-border-radius: 2px !important;
+  -o-border-radius: 2px !important;
+}
+.login-page .login-form form .btn{
+  border-radius: 2px !important;
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  -ms-border-radius: 2px !important;
+  -o-border-radius: 2px !important;
+}
+.login-page .login-form form .otp-login{
+  margin: 1rem 0;
+  background-color: var(--bs-outline-primary);
+  border-width: 2px;
+  font-weight: 500;
+  color: var(--bs-primary);
+}
+.login-page .login-form form .otp-login:hover{
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: var(--bs-white);
+}
+.login-form p{
+  font-weight: 500;
+  text-align: center;
+}
+.login-form p:last-of-type{
+  color: var(--bs-secondary) !important;
+}
+.login-form ul{
+  list-style: none;
+  margin: 0;
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+}
+.login-form ul li{
+  font-size: 14px;
+}
+.login-form ul li a{
+  text-decoration: none;
+  color: var(--bs-dark);
+  font-size: 14px;
+}
+.modal-dialog .modal-content .modal-body{
+  text-align: center;
+}
+.modal-dialog .modal-content .modal-body img{
+ height: 3rem;
+ margin: 1rem 0;
+}
+.modal-dialog .modal-content .modal-body h5{
+  font-weight: 600;
+}
+.modal-dialog .modal-content .modal-body p{
+  color: var(--bs-secondary);
+}
+.modal-bottom p{
+  color: var(--bs-danger) !important;
+  font-weight: 700;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+.modal-body form .form-control {
+  border-radius: 2px !important;
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  -ms-border-radius: 2px !important;
+  -o-border-radius: 2px !important;
+}
+.modal-body form .form-control:focus{
+  box-shadow: none !important;
+  border-width: 2px !important;
+}
+/* login end */
