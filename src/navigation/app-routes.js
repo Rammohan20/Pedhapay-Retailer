@@ -1,16 +1,19 @@
-import { useRoutes } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import routes from '../constants/routes';
-import Login from '../views/auth/login';
-import Home from '../views/retailer/home';
+import { lazyLoadRoutes } from '../utils/lazy-loader';
+import { useRoutes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 
 export function AppRoutes() {
-
+    
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const RetailerRoutes = [
         {
             path: routes.dashbaord,
             children: [
                 {
-                    index: true, element: <Home/>,
+                    index: true,  element: lazyLoadRoutes('retailer/home'),
                 },
                
             ]
@@ -19,19 +22,16 @@ export function AppRoutes() {
 
     const AuthRoutes =[
         {
-            path: routes.login, element: <Login/>,
+            path: routes.login, element: lazyLoadRoutes('auth/login'),
         },
     ]
+   
+    useEffect(() => {
+        const sessionToken = Cookies.get('sessionToken');
+        setIsLoggedIn(sessionToken === 'Retailer'); 
+    },);
 
-    let appRoutes
-    let ram
-
-    if(ram && 100){
-        appRoutes = RetailerRoutes
-    }
-    else{
-        appRoutes = AuthRoutes
-    }
+    const appRoutes = isLoggedIn ? RetailerRoutes : AuthRoutes;
 
     return useRoutes(appRoutes);
 }

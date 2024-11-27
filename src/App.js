@@ -6,12 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-      <>
-        <React.Fragment>
-        <ToastContainer /> 
-          <AppRoutes />
-        </React.Fragment>
-      </>
+    <>
+      <React.Fragment>
+        <ToastContainer />
+        <AppRoutes />
+      </React.Fragment>
+    </>
   );
 }
 

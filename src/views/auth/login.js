@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Images from '../../constants/images';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+import routes from '../../constants/routes';
 
 function Login() {
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [showTpinModal, setShowTpinModal] = useState(false);
+  const [storedCredentials, setStoredCredentials] = useState([]);
+  const handleOtpModalClose = () => setShowOtpModal(false);
+  const handleOtpModalShow = () => setShowOtpModal(true);
+  const handleTpinModalClose = () => setShowTpinModal(false);
+  const handleTpinModalShow = () => setShowTpinModal(true);
+  const navigate = useNavigate();
+
   // Validation schema for login form
   const validationSchema = Yup.object({
     userId: Yup.string()
@@ -27,6 +38,8 @@ function Login() {
       .length(6, 'Must be 6 digits'),
   });
 
+
+  // tpin validation
   const tpinValidationSchema = Yup.object({
     tpin: Yup.array()
       .of(
@@ -36,26 +49,6 @@ function Login() {
       )
       .length(4, 'Must be 4 digits'),
   });
-
-  const [showOtpModal, setShowOtpModal] = useState(false);
-  const [showTpinModal, setShowTpinModal] = useState(false);
-  const [storedCredentials, setStoredCredentials] = useState([]);
-  const handleOtpModalClose = () => setShowOtpModal(false);
-  const handleOtpModalShow = () => setShowOtpModal(true);
-
-  const handleTpinModalClose = () => setShowTpinModal(false);
-  const handleTpinModalShow = () => setShowTpinModal(true);
-
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log('Form data:', values);
-    setSubmitting(false);
-
-    if (values.otp) {
-      console.log('OTP:', values.otp.join(''));
-    } else if (values.tpin) {
-      console.log('TPIN:', values.tpin.join(''));
-    }
-  };
 
   // login
   const handleSignIn = async (loginid, password) => {
@@ -94,23 +87,69 @@ function Login() {
     }
   };
 
+  // tpin
   const handleSubmitTpin = async (values) => {
-    const tpin = values.tpin.join(''); // Combine the TPIN array into a single string
-    
+    const tpin = values.tpin.join(''); 
+    const { loginid, password } = storedCredentials;
+
     const loginParams = {
-      userId: 'yourUserId', // You can replace this with the actual userId if needed
-      password: 'yourPassword', // Similarly, replace with the actual password
-      tpin: tpin, // Pass the TPIN here
-      otherParam: 'value', // Add any other required parameters here
+      method: "validatepin",
+      loginid: loginid,
+      password: password,
+      tpin: tpin,
     };
-  
+
     try {
-      // Call your login API with the required parameters
-      const response = await axios.post('your-login-api-endpoint', loginParams);
-      console.log(response.data); // Handle the response accordingly
+      const response = await axios.post(
+        "http://api.payimps.in/recApiFinal/service.aspx",
+        loginParams,
+        {
+          headers: {
+            aksom: 'bebdc5f462e19958af91dd728d97a0c8',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      );
+
+      const { status, statuscode, message } = response.data;
+
+      if (status === true && statuscode == 200) {
+        toast.success('Login successful!');
+        Cookies.set('user', loginid, { expires: 1 }); // Expires in 1 day
+        Cookies.set('sessionToken', 'Retailer', { expires: 1 });
+        navigate(routes.dashbaord); 
+      } else if (status === false && statuscode == 201) {
+        toast.error(message || 'Invalid TPIN. Please try again.');
+      } else {
+        toast.error('Unexpected response from the server. Please try again later.');
+      }
     } catch (error) {
-      console.error('Login failed:', error);
-      // Handle error (e.g., show an error message)
+      toast.error('Login failed. Please check your connection or try again later.');
+    }
+  };
+
+  
+  const handleSendOtp = async () => {
+    const { loginid } = storedCredentials;
+    const otpParams = {
+      method: "appsendotp",
+      loginid: loginid,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://api.payimps.in/recApiFinal/service.aspx",
+        otpParams,
+        {
+          headers: {
+            aksom: "bebdc5f462e19958af91dd728d97a0c8",
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
+      console.log("OTP sent successfully:", response.data);
+    } catch (error) {
+      console.error("Error while sending OTP:", error);
     }
   };
   
@@ -188,7 +227,7 @@ function Login() {
                       <Button
                         type="button"
                         className="w-100 otp-login"
-                        onClick={handleOtpModalShow}
+                        onClick={handleSendOtp}
                         disabled={isSubmitting || !values.userId || !values.password || errors.userId || errors.password}
                       >
                         Login With OTP
@@ -225,7 +264,7 @@ function Login() {
               <Formik
                 initialValues={{ otp: Array(6).fill('') }}
                 validationSchema={otpValidationSchema}
-                onSubmit={handleSubmit}
+                // onSubmit={handleSubmitOtp}
               >
                 {({ values, setFieldValue, isValid }) => (
                   <FormikForm>
@@ -289,7 +328,7 @@ function Login() {
               <Formik
                 initialValues={{ tpin: Array(4).fill('') }}
                 validationSchema={tpinValidationSchema}
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmitTpin}
               >
                 {({ values, setFieldValue, isValid }) => (
                   <FormikForm>
