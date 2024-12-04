@@ -240,7 +240,7 @@ body {
 }
 
 /* card-heading */
-.page-wrapper .home-section .dashboard-cards .card .card-body .card-heading {
+.page-wrapper .home-section  .card .card-body .card-heading {
   list-style: none;
   padding: 0;
   margin-bottom: 0.50rem;
@@ -250,35 +250,35 @@ body {
   gap: 0.50rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .card-heading li h5 {
+.page-wrapper .home-section  .card .card-body .card-heading li h5 {
   margin-bottom: 0;
   display: flex;
   align-items: center;
   gap: 0.50rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .card-heading li h5 img {
+.page-wrapper .home-section  .card .card-body .card-heading li h5 img {
   height: 1.50rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .card-heading li h5 i {
+.page-wrapper .home-section  .card .card-body .card-heading li h5 i {
   color: #AFAFAF;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .card-heading li .btn {
+.page-wrapper .home-section  .card .card-body .card-heading li .btn {
   border: 2px solid var(--bs-border-color);
   box-shadow: var(--bs-box-shadow-sm);
   background-color: var(--bs-white);
   color: var(--bs-secondary);
 }
 
-.page-wrapper .home-section .dashboard-cards .card {
+.page-wrapper .home-section  .card {
   border: 2px solid #ECEEF6;
   border-radius: var(--bs-border-radius-lg);
   width: 100%;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .overview-cards ul {
+.page-wrapper .home-section  .card .card-body .overview-cards ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -289,28 +289,28 @@ body {
   padding: 0.50rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .overview-cards ul:hover {
+.page-wrapper .home-section  .card .card-body .overview-cards ul:hover {
   background-color: var(--bs-light);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .overview-cards ul li p:first-of-type {
+.page-wrapper .home-section  .card .card-body .overview-cards ul li p:first-of-type {
   margin-bottom: 0.25rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .overview-cards ul li p:last-of-type {
+.page-wrapper .home-section  .card .card-body .overview-cards ul li p:last-of-type {
   color: var(--bs-secondary);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .overview-cards ul li .card-title {
+.page-wrapper .home-section  .card .card-body .overview-cards ul li .card-title {
   font-weight: 800;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .overview-cards ul li:last-of-type i {
+.page-wrapper .home-section  .card .card-body .overview-cards ul li:last-of-type i {
   font-size: 2rem;
   color: var(--bs-dark);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .overview-cards ul li p .badge {
+.page-wrapper .home-section  .card .card-body .overview-cards ul li p .badge {
   background: var(--bs-success-bg-subtle);
   color: var(--bs-success);
   border: 1px solid #8FE7BE;
@@ -318,40 +318,40 @@ body {
   padding: 0.16rem 0.25rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .overview-cards ul li p .badge i {
+.page-wrapper .home-section  .card .card-body .overview-cards ul li p .badge i {
   font-weight: 600;
   font-size: 12px;
 }
 
 /* tabs */
-.page-wrapper .home-section .dashboard-cards .card .card-body .counterfeit-activities .nav {
+.page-wrapper .home-section  .card .card-body .counterfeit-activities .nav {
   flex-wrap: nowrap;
   margin-top: 1rem;
   text-wrap: nowrap;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .counterfeit-activities .nav .nav-item,
-.page-wrapper .home-section .dashboard-cards .card .card-body .counterfeit-activities .nav .nav-item .nav-link {
+.page-wrapper .home-section  .card .card-body .counterfeit-activities .nav .nav-item,
+.page-wrapper .home-section  .card .card-body .counterfeit-activities .nav .nav-item .nav-link {
   width: 100%;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .counterfeit-activities .nav .nav-item .nav-link {
+.page-wrapper .home-section  .card .card-body .counterfeit-activities .nav .nav-item .nav-link {
   border-radius: 2px;
   font-weight: 500;
   color: var(--bs-secondary);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .counterfeit-activities .nav .nav-item .nav-link.active {
+.page-wrapper .home-section  .card .card-body .counterfeit-activities .nav .nav-item .nav-link.active {
   box-shadow: var(--bs-box-shadow-sm);
   color: var(--bs-white);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .counterfeit-activities .tab-content .tab-pane img {
+.page-wrapper .home-section  .card .card-body .counterfeit-activities .tab-content .tab-pane img {
   height: 15rem;
   width: 100%;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .anti-counterfeit-results .counterfeit-digit {
+.page-wrapper .home-section  .card .card-body .anti-counterfeit-results .counterfeit-digit {
   list-style: none;
   padding: 0;
   border-top: 1px solid var(--bs-border-color);
@@ -360,13 +360,13 @@ body {
   justify-content: space-between;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .anti-counterfeit-results .counterfeit-digit li {
+.page-wrapper .home-section  .card .card-body .anti-counterfeit-results .counterfeit-digit li {
   width: 100%;
   text-align: center;
   padding-top: 0.50rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-text {
+.page-wrapper .home-section  .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-text {
   margin-bottom: 0.25rem;
   color: var(--bs-secondary);
   display: flex;
@@ -375,57 +375,57 @@ body {
   gap: 0.25rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-text i,
-.page-wrapper .home-section .dashboard-cards .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-text {
+.page-wrapper .home-section  .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-text i,
+.page-wrapper .home-section  .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-text {
   font-weight: 500;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-text i {
+.page-wrapper .home-section  .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-text i {
   font-size: 20px;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-title {
+.page-wrapper .home-section  .card .card-body .anti-counterfeit-results .counterfeit-digit li .card-title {
   margin-bottom: 0;
   font-weight: 600;
 }
 
 /* product-wise-checked */
-.page-wrapper .home-section .dashboard-cards .card .card-body .product-wise-checked .product-wise-status {
+.page-wrapper .home-section  .card .card-body .product-wise-checked .product-wise-status {
   padding: 0;
   margin: 0;
   list-style: none;
   display: flex;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .product-wise-checked .product-wise-status li {
+.page-wrapper .home-section  .card .card-body .product-wise-checked .product-wise-status li {
   width: 100%;
   display: flex;
   gap: 0.25rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .product-wise-checked .product-wise-status li .card-text {
+.page-wrapper .home-section  .card .card-body .product-wise-checked .product-wise-status li .card-text {
   margin-bottom: 0.25rem;
   font-weight: 500;
   color: var(--bs-secondary);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .product-wise-checked .product-wise-status li .card-title {
+.page-wrapper .home-section  .card .card-body .product-wise-checked .product-wise-status li .card-title {
   font-weight: 600;
   margin-bottom: 0;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .product-wise-checked .product-wise-status li .card-title .card-text {
+.page-wrapper .home-section  .card .card-body .product-wise-checked .product-wise-status li .card-title .card-text {
   font-weight: 400;
   font-size: 16px;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .product-wise-checked .product-wise-status li .card-title i {
+.page-wrapper .home-section  .card .card-body .product-wise-checked .product-wise-status li .card-title i {
   color: var(--bs-secondary);
   font-size: 14px;
 }
 
 /* daily-activities */
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data {
   list-style: none;
   padding: 0;
   border-top: 1px solid var(--bs-border-color);
@@ -435,7 +435,7 @@ body {
   gap: 1rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data li {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data li {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -443,41 +443,41 @@ body {
   padding-top: 0.50rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data li .activite-data {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data li .activite-data {
   display: flex;
   gap: 0.50rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data li .activite-data .card-title {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data li .activite-data .card-title {
   margin-bottom: 0;
   font-weight: 600;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data li .activite-data .card-text {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data li .activite-data .card-text {
   color: var(--bs-secondary);
   font-size: 14px;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data li h6 {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data li h6 {
   margin-bottom: 0;
   font-weight: 600;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data li:first-of-type h6 {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data li:first-of-type h6 {
   color: var(--bs-primary);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data li:last-of-type h6 {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data li:last-of-type h6 {
   color: var(--bs-success);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .daily-activities .daily-activities-data li .activite-data img {
+.page-wrapper .home-section  .card .card-body .daily-activities .daily-activities-data li .activite-data img {
   height: 100%;
   border-radius: var(--bs-border-radius-lg);
   height: 2.80rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .list-group .list-group-item {
+.page-wrapper .home-section  .card .card-body .state-wise .list-group .list-group-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -486,31 +486,31 @@ body {
   padding-right: 0;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .list-group .list-group-item span,
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .list-group .list-group-item div {
+.page-wrapper .home-section  .card .card-body .state-wise .list-group .list-group-item span,
+.page-wrapper .home-section  .card .card-body .state-wise .list-group .list-group-item div {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .list-group .list-group-item div {
+.page-wrapper .home-section  .card .card-body .state-wise .list-group .list-group-item div {
   color: var(--bs-dark);
   font-weight: 500;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .list-group .list-group-item span i {
+.page-wrapper .home-section  .card .card-body .state-wise .list-group .list-group-item span i {
   font-size: 8px;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .list-group .list-group-item span:first-of-type i {
+.page-wrapper .home-section  .card .card-body .state-wise .list-group .list-group-item span:first-of-type i {
   color: var(--bs-primary);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .list-group .list-group-item span:last-of-type i {
+.page-wrapper .home-section  .card .card-body .state-wise .list-group .list-group-item span:last-of-type i {
   color: var(--bs-warning);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .state-type {
+.page-wrapper .home-section  .card .card-body .state-wise .state-type {
   display: flex;
   align-items: center;
   padding: 0;
@@ -520,7 +520,7 @@ body {
   gap: 1rem;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .state-type li {
+.page-wrapper .home-section  .card .card-body .state-wise .state-type li {
   display: flex;
   align-items: center;
   gap: 0.50rem;
@@ -529,42 +529,42 @@ body {
   border-radius: var(--bs-border-radius-lg);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .state-type i {
+.page-wrapper .home-section  .card .card-body .state-wise .state-type i {
   font-size: 12px;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .state-type li:first-of-type i {
+.page-wrapper .home-section  .card .card-body .state-wise .state-type li:first-of-type i {
   color: var(--bs-primary);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .state-wise .state-type li:last-of-type i {
+.page-wrapper .home-section  .card .card-body .state-wise .state-type li:last-of-type i {
   color: var(--bs-warning);
 }
 
 /* recent-code-check */
-.page-wrapper .home-section .dashboard-cards .card .card-body .recent-code-check {
+.page-wrapper .home-section  .card .card-body .recent-code-check {
   border: 1px solid var(--bs-border-color);
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .recent-code-check .table {
+.page-wrapper .home-section  .card .card-body .recent-code-check .table {
   margin-bottom: 0;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .recent-code-check .table thead tr th {
+.page-wrapper .home-section  .card .card-body .recent-code-check .table thead tr th {
   font-size: 14px;
   color: #666687;
   background-color: #F7F8FE;
   text-wrap: nowrap;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .recent-code-check .table tbody tr td,
-.page-wrapper .home-section .dashboard-cards .card .card-body .recent-code-check .table tbody tr th {
+.page-wrapper .home-section  .card .card-body .recent-code-check .table tbody tr td,
+.page-wrapper .home-section  .card .card-body .recent-code-check .table tbody tr th {
   font-size: 14px;
   text-wrap: nowrap;
 }
 
-.page-wrapper .home-section .dashboard-cards .card .card-body .recent-code-check .table tbody tr th,
-.page-wrapper .home-section .dashboard-cards .card .card-body .recent-code-check .table thead tr th {
+.page-wrapper .home-section  .card .card-body .recent-code-check .table tbody tr th,
+.page-wrapper .home-section  .card .card-body .recent-code-check .table thead tr th {
   font-weight: 600;
 }
 

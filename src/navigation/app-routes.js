@@ -5,6 +5,7 @@ import { useRoutes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 
+
 export function AppRoutes() {
     
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,7 +14,10 @@ export function AppRoutes() {
             path: routes.dashbaord,
             children: [
                 {
-                    index: true,  element: lazyLoadRoutes('retailer/home'),
+                    index: true,  element:  lazyLoadRoutes('retailer/home') ,
+                },
+                {
+                    path: routes.report.ledger,  element: lazyLoadRoutes('retailer/reports/ledger') ,
                 },
                
             ]

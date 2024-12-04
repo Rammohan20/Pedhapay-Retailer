@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Images from '../../constants/images';
@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import routes from '../../constants/routes';
 
 function Login() {
+
+
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [showTpinModal, setShowTpinModal] = useState(false);
   const [storedCredentials, setStoredCredentials] = useState([]);
@@ -18,7 +20,9 @@ function Login() {
   const handleTpinModalClose = () => setShowTpinModal(false);
   const handleTpinModalShow = () => setShowTpinModal(true);
   const navigate = useNavigate();
+  const [signInResponse, setSignInResponse] = useState(null);
 
+  const [loginType, setLoginType] = useState('');
   // Validation schema for login form
   const validationSchema = Yup.object({
     userId: Yup.string()
@@ -26,6 +30,8 @@ function Login() {
       .matches(/^\d{10}$/, 'User ID must be exactly 10 digits'),
     password: Yup.string().required('Password is required'),
   });
+
+
 
   // Validation schema for OTP form
   const otpValidationSchema = Yup.object({
@@ -58,27 +64,31 @@ function Login() {
       password,
       pid: '1',
     };
-
+  
     try {
-      const signInResponse = await axios.post("http://api.payimps.in/recApiFinal/service.aspx", requestBodySignIn, {
+      const response = await axios.post("http://api.payimps.in/recApiFinal/service.aspx", requestBodySignIn, {
         headers: {
           aksom: 'bebdc5f462e19958af91dd728d97a0c8',
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
-
-      if (signInResponse.status === 200) {
+  
+      if (response.status === 200) {
+        setSignInResponse(response.data);   
         setStoredCredentials({
           loginid,
           password,
         });
-        const { Id } = signInResponse.data;
-
+        const { Id } = response.data;
         if (Id === "N") {
-          toast.error("Invalid credentials. Please try again.");
+        
         } else if (!isNaN(Id) && Id !== "N") {
-          toast.success('Almost there! Please provide your valid T-PIN to proceed.');
-          handleTpinModalShow();
+          if (loginType === 'otp') {
+            handleOtpModalShow();
+          } else if (loginType === 'login') {
+            handleTpinModalShow();
+            toast.success('Almost there! Please provide your valid T-PIN to proceed.');
+          }
         }
       }
     } catch (error) {
@@ -86,12 +96,53 @@ function Login() {
       throw new Error('An error occurred. Please try again.');
     }
   };
+  
 
+  useEffect(() => {
+    const { loginid } = storedCredentials;
+    if (signInResponse) {
+      const { Id } = signInResponse;
+  
+      if (loginid && loginType === 'otp' && !isNaN(Id) && Id !== "N") {
+        const requestOtp = {
+          method: 'appsendotp',
+          loginid: loginid,
+        };
+  
+        const sendOtp = async () => {
+          try {
+            const response = await axios.post(
+              "http://api.payimps.in/recApiFinal/service.aspx",
+              requestOtp,
+              {
+                headers: {
+                  aksom: 'bebdc5f462e19958af91dd728d97a0c8',
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+              }
+            );
+            if (response.data.status === true) {
+              toast.success(response.data.message);
+            } else {
+              toast.error('Failed to send OTP. Please try again.');
+            }
+          } catch (error) {
+            toast.error('Failed to send OTP. Please try again.');
+          }
+        };
+        sendOtp();
+      } else if (Id === "N") {
+        toast.error("Invalid credentials. Please try again.");
+      }
+    }
+  }, [storedCredentials, signInResponse, loginType]); 
+  
+  
+  
   // tpin
   const handleSubmitTpin = async (values) => {
-    const tpin = values.tpin.join(''); 
+    const tpin = values.tpin.join('');
     const { loginid, password } = storedCredentials;
-
     const loginParams = {
       method: "validatepin",
       loginid: loginid,
@@ -117,7 +168,7 @@ function Login() {
         toast.success('Login successful!');
         Cookies.set('user', loginid, { expires: 1 }); // Expires in 1 day
         Cookies.set('sessionToken', 'Retailer', { expires: 1 });
-        navigate(routes.dashbaord); 
+        navigate(routes.dashbaord);
       } else if (status === false && statuscode == 201) {
         toast.error(message || 'Invalid TPIN. Please try again.');
       } else {
@@ -128,31 +179,77 @@ function Login() {
     }
   };
 
-  
-  const handleSendOtp = async () => {
+  // otp-send
+  const handleSubmitOtp = async () => { 
     const { loginid } = storedCredentials;
-    const otpParams = {
-      method: "appsendotp",
-      loginid: loginid,
-    };
+    if (!loginid) {
+      toast.error('Login ID is missing. Please try again.', {});
+      return;
+    }
 
     try {
+      const requestotp = {
+        method: 'appsendotp',
+        loginid: loginid,
+      };
       const response = await axios.post(
         "http://api.payimps.in/recApiFinal/service.aspx",
-        otpParams,
+        requestotp,
         {
           headers: {
-            aksom: "bebdc5f462e19958af91dd728d97a0c8",
-            "Content-Type": "application/x-www-form-urlencoded",
+            aksom: 'bebdc5f462e19958af91dd728d97a0c8',
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
         }
       );
-      console.log("OTP sent successfully:", response.data);
+      if (response.data?.status === true) {
+        toast.success(response.data.message || 'OTP sent successfully!', {});
+      } else {
+        toast.error(response.data.message || 'Failed to send OTP. Please try again.', {});
+      }
     } catch (error) {
-      console.error("Error while sending OTP:", error);
+      toast.error('An error occurred while sending OTP. Please check your connection.', {});
     }
   };
-  
+
+
+  // otp verify
+  const handleSubmitOtpVerify = async (otp) => {
+    try {
+      const { loginid } = storedCredentials;
+      const requestotp = {
+        method: 'appverifyotp',
+        loginid: loginid,
+        otp: otp,
+      };
+
+      const response = await axios.post(
+        "http://api.payimps.in/recApiFinal/service.aspx",
+        requestotp,
+        {
+          headers: {
+            aksom: 'bebdc5f462e19958af91dd728d97a0c8',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      );
+
+      if (response.data?.status === true) {
+        toast.success('Login successful!', {
+        });
+        Cookies.set('user', loginid, { expires: 1 }); // Expires in 1 day
+        Cookies.set('sessionToken', 'Retailer', { expires: 1 });
+        navigate(routes.dashbaord);
+      } else {
+        toast.error(response.data.message || 'OTP verification failed. Please try again.', {
+        });
+      }
+    } catch (error) {
+      toast.error('An error occurred while verifying OTP. Please check your connection.', {
+      });
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <>
@@ -172,12 +269,15 @@ function Login() {
                     try {
                       const response = await handleSignIn(values.userId, values.password);
                       if (response && response.Id && !isNaN(response.Id) && response.Id !== "N") {
-                        handleTpinModalShow();
-
+                        if (loginType == 'otp') {
+                          handleOtpModalShow();
+                          handleSubmitOtp();
+                        } else if (loginType === 'login') {
+                          handleTpinModalShow();
+                        }
                       }
                     } catch (error) {
-
-                      console.error("Error during sign-in:", error);
+                      console.error("Error during sign-in:", error.message || error);
                     } finally {
                       actions.setSubmitting(false);
                     }
@@ -195,11 +295,7 @@ function Login() {
                           className={`form-control ${touched.userId && errors.userId ? 'is-invalid' : ''}`}
                           maxLength="10"
                         />
-                        <ErrorMessage
-                          name="userId"
-                          component="div"
-                          className="invalid-feedback"
-                        />
+                        <ErrorMessage name="userId" component="div" className="invalid-feedback" />
                       </div>
                       <div className="mb-3">
                         <label htmlFor="password">
@@ -210,25 +306,23 @@ function Login() {
                           type="password"
                           className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
                         />
-                        <ErrorMessage
-                          name="password"
-                          component="div"
-                          className="invalid-feedback"
-                        />
+                        <ErrorMessage name="password" component="div" className="invalid-feedback" />
                       </div>
 
                       <Button
                         type="submit"
                         className="w-100"
                         disabled={isSubmitting || !values.userId || !values.password || errors.userId || errors.password}
+                        onClick={() => setLoginType('login')} 
                       >
                         Login
                       </Button>
+
                       <Button
-                        type="button"
+                        type="submit"
                         className="w-100 otp-login"
-                        onClick={handleSendOtp}
-                        disabled={isSubmitting || !values.userId || !values.password || errors.userId || errors.password}
+                        disabled={isSubmitting || !values.userId || errors.userId}
+                        onClick={() => setLoginType('otp')}
                       >
                         Login With OTP
                       </Button>
@@ -256,7 +350,12 @@ function Login() {
             </Col>
           </Row>
           {/* OTP Modal */}
-          <Modal show={showOtpModal} onHide={handleOtpModalClose} backdrop="static" keyboard={false}>
+          <Modal
+            show={showOtpModal}
+            onHide={handleOtpModalClose}
+            backdrop="static"
+            keyboard={false}
+          >
             <Modal.Body>
               <img src={Images.otp} alt="otp" />
               <h5>OTP Sent Successfully</h5>
@@ -264,9 +363,12 @@ function Login() {
               <Formik
                 initialValues={{ otp: Array(6).fill('') }}
                 validationSchema={otpValidationSchema}
-                // onSubmit={handleSubmitOtp}
+                onSubmit={(values) => {
+                  const otp = values.otp.join(''); 
+                  handleSubmitOtpVerify(otp); 
+                }}
               >
-                {({ values, setFieldValue, isValid }) => (
+                {({ values, setFieldValue }) => (
                   <FormikForm>
                     <div className="d-flex justify-content-center">
                       {values.otp.map((_, index) => (
@@ -282,13 +384,11 @@ function Login() {
                               if (/^\d?$/.test(value)) {
                                 setFieldValue(`otp[${index}]`, value);
                                 if (value && index < 5) {
-                                  // Move focus to the next input field
                                   document.getElementById(`otp-${index + 1}`).focus();
                                 }
                               }
                             }}
                             onKeyDown={(e) => {
-                              // Handle Backspace to move focus to the previous field
                               if (e.key === "Backspace" && !values.otp[index] && index > 0) {
                                 document.getElementById(`otp-${index - 1}`).focus();
                               }

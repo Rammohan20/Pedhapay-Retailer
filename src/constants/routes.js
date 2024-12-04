@@ -1,5 +1,8 @@
 const routes = {
    login: "/login",
-   dashbaord: "/"
+   dashbaord: "/",
+   report:{
+     ledger: "/ledger"
+   }
 }
 export default routes

@@ -1,3 +1,4 @@
+import routes from "../constants/routes";
 import Routes from "../constants/routes";
 
   
@@ -8,10 +9,45 @@ export const VENDOR_SIDEBAR_NAV_MENU_ITEMS = {
         {
             name: "Dashboard",
             icon: <i className="bx bxs-home icon"></i>,
+            path: Routes.dashbaord,
+        },
+        {
+            name: "Money Transfer",
+            icon: <i className="bx bxs-user-circle icon"></i>,
             path: Routes.Login,
         },
         {
-            name: "DMT",
+            name: "Mobile Recharge",
+            icon: <i className="bx bxs-user-circle icon"></i>,
+            path: Routes.Login,
+        },
+        {
+            name: "DTH Recharge",
+            icon: <i className="bx bxs-user-circle icon"></i>,
+            path: Routes.Login,
+        },
+        {
+            name: "UPI",
+            icon: <i className="bx bxs-user-circle icon"></i>,
+            path: Routes.Login,
+        },
+        {
+            name: "Fund Request",
+            icon: <i className="bx bxs-user-circle icon"></i>,
+            path: Routes.Login,
+        },
+        {
+            name: "FNG Onboard",
+            icon: <i className="bx bxs-user-circle icon"></i>,
+            path: Routes.Login,
+        },
+        {
+            name: "LIC Premium",
+            icon: <i className="bx bxs-user-circle icon"></i>,
+            path: Routes.Login,
+        },
+        {
+            name: "Credit Card Payment",
             icon: <i className="bx bxs-user-circle icon"></i>,
             path: Routes.Login,
         },
@@ -38,33 +74,6 @@ export const VENDOR_SIDEBAR_NAV_MENU_ITEMS = {
     // admin sidebar submenu
     subMenu: [
         {
-            name: "Reports",
-            icon: <i className="bx bx-support icon"></i>,
-            children: [
-                {
-                    name: "Attendance Summary",
-                    path: Routes.Login,
-                },
-                {
-                    name: "Attendance Log",
-                    path: Routes.Login,
-                },
-                {
-                    name: "Log Import",
-                    path: Routes.Login,
-                },
-                {
-                    name: "Auto Attendance",
-                    path: Routes.Login,
-                },
-                {
-                    name: "Monthly Leave Report",
-                    path: Routes.Login,
-                },
-            ],
-        },
-
-        {
             name: "Aeps",
             icon: <i className="bx bx-support icon"></i>,
             children: [
@@ -78,6 +87,56 @@ export const VENDOR_SIDEBAR_NAV_MENU_ITEMS = {
                 }
             ],
         },
+        {
+            name: "BBPS",
+            icon: <i className="bx bx-support icon"></i>,
+            children: [
+                {
+                    name: "Offline Payment",
+                    path: Routes.Login,
+                },
+                {
+                    name: "Online Payment",
+                    path: Routes.Login,
+                }
+            ],
+        },
+        {
+            name: "Reports",
+            icon: <i className="bx bx-support icon"></i>,
+            children: [
+                {
+                    name: "Ledger",
+                    path: routes.report.ledger,
+                },
+                {
+                    name: "UPI Ledger",
+                    path: Routes.Login,
+                },
+                {
+                    name: "DMT",
+                    path: Routes.Login,
+                },
+                {
+                    name: "AEPS",
+                    path: Routes.Login,
+                },
+                {
+                    name: "AEPS Ledger",
+                    path: Routes.Login,
+                },
+                {
+                    name: "Recharge",
+                    path: Routes.Login,
+                },
+                {
+                    name: "Credit Card Bill",
+                    path: Routes.Login,
+                },
+            ],
+        },
+
+        
     ],
 };
 
